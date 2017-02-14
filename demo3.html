@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" user-scalable="no">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			body {
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="canvas" width="1000" height="532"></canvas>
+	</body>
+	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/util.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jCanvaScript.1.5.18.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		var option = {
+			id: uuid(),
+			x: (canvas.width - 180) / 2,
+			y: 390,
+			width: 180,
+			height: 75,
+			color: "#FF0000",
+			elder: [{
+				id: uuid(),
+				x: (canvas.width - 180) / 2 + 170,
+				y: 150,
+				width: 180,
+				height: 75,
+				color: "#880066",
+				elder: [],
+				companion: [{
+					id: uuid(),
+					x: (canvas.width - 180) / 2 + 340,
+					y: 150,
+					width: 180,
+					height: 75,
+					color: "#880066",
+					elder: [{
+						id: uuid(),
+						x: (canvas.width - 180) / 2 + 340,
+						y: 0,
+						width: 180,
+						height: 75,
+						color: "#880066",
+						elder: [],
+						companion: [{
+							id: uuid(),
+							x: (canvas.width - 180) / 2 + 170,
+							y: 0,
+							width: 180,
+							height: 75,
+							color: "#880066",
+							elder: [],
+							companion: []
+						}]
+					}],
+					companion: []
+				}]
+			}],
+			companion: [],
+			children: [{
+				id: uuid(),
+				y: 500,
+				width: 180,
+				height: 75,
+				color: "#335566",
+				companion: [],
+				children: [{
+					id: uuid(),
+					y: 610,
+					width: 180,
+					height: 75,
+					color: "#338866",
+					companion: [],
+					children: []
+				}, {
+					id: uuid(),
+					y: 610,
+					width: 180,
+					height: 75,
+					color: "#553366",
+					companion: [],
+					children: []
+				}]
+			}, {
+				id: uuid(),
+				y: 500,
+				width: 180,
+				height: 75,
+				color: "#553344",
+				companion: [{
+					id: uuid(),
+					x: 600,
+					y: 500,
+					width: 180,
+					height: 75,
+					color: "#6F88F6"
+				}, {
+					id: uuid(),
+					y: 500,
+					width: 180,
+					height: 75,
+					color: "#6F88F6"
+				}],
+				children: []
+			}, {
+				id: uuid(),
+				y: 500,
+				width: 180,
+				height: 75,
+				color: "#661100",
+				companion: [{
+					id: uuid(),
+					y: 500,
+					width: 180,
+					height: 75,
+					color: "#6F88F6"
+				}],
+				children: []
+			}, {
+				id: uuid(),
+				y: 500,
+				width: 180,
+				height: 75,
+				color: "#FF8866",
+				companion: [],
+				children: []
+			}]
+		};
+		jc.start("canvas", 60);
+	</script>
+	<script type="text/javascript" src="js/MyJCTree.js"></script>
+	<script>
+	</script>
+
+</html>

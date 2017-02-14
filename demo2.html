@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			body {
+				margin: 0px;
+				padding: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="canvas" width="1920" height="800"></canvas>
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		var boss = {
+			color: "#FF0000",
+			x: (canvas.width - 150) / 2,
+			y: 0,
+			width: 150,
+			height: 75,
+			children: [{
+				color: "#335566",
+				margin_top: 20,
+				margin_right: 10,
+				margin_bottom: 20,
+				margin_left: 10,
+				children: [{
+					color: "#335566",
+					margin_top: 20,
+					margin_right: 10,
+					margin_bottom: 20,
+					margin_left: 10,
+				}]
+			}, {
+				color: "#553344",
+				margin_top: 20,
+				margin_right: 10,
+				margin_bottom: 20,
+				margin_left: 10,
+				children: []
+			}, {
+				color: "#661100",
+				margin_top: 20,
+				margin_right: 10,
+				margin_bottom: 20,
+				margin_left: 10,
+				children: []
+			}, {
+				color: "#FF8866",
+				margin_top: 20,
+				margin_right: 10,
+				margin_bottom: 20,
+				margin_left: 10,
+				children: []
+			}]
+		};
+
+		draw(boss);
+
+		canvas.onmousemove = function(e) {
+			var e = window.event || e
+			var rect = this.getBoundingClientRect();
+			var mouseX = e.clientX - rect.left; //获取鼠标在canvsa中的坐标
+			var mouseY = e.clientY - rect.top;
+		}
+
+		function draw(e) {
+			ctx.fillStyle = e.color;
+			ctx.fillRect(e.x, e.y, e.width, e.height);
+
+			drawChildren(e);
+		}
+
+		function drawChildren(e) {
+			var allChildrenMarginWidth = 0;
+			var allChildrenWidth = 0;
+			for(var i = 0; i < e.children.length; i++) {
+				allChildrenMarginWidth += (i > 0 ? e.children[i - 1].margin_left : 0) + (i < e.children.length - 1 ? e.children[i].margin_right : 0);
+				allChildrenWidth += e.width;
+				console.log(e.width)
+			}
+			var allChildrenBoxWidth = allChildrenWidth + allChildrenMarginWidth;
+			console.log(allChildrenWidth)
+			// var previousChildX = ((canvas.width - e.width * e.children.length) / 2); 靠左居中对齐
+			var previousChildX = ((canvas.width - allChildrenBoxWidth) / 2);
+			for(var i = 0; i < e.children.length; i++) {
+				// TODO 画children的children
+				ctx.fillStyle = e.children[i].color;
+				var previousChildMarginRight = i > 0 ? e.children[i - 1].margin_right : 0;
+				var thisChildMarginLeft = i > 0 ? e.children[i].margin_left : 0;
+				previousChildX += previousChildMarginRight + thisChildMarginLeft + (i == 0 ? 0 : e.width);
+				var previousChildY = boss.y + boss.height + e.children[i].margin_top;
+				ctx.fillRect(previousChildX, previousChildY, e.width, e.height);
+			}
+		}
+
+		function clear() {
+			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+		}
+	</script>
+
+</html>
